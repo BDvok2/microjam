@@ -1,7 +1,5 @@
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { useLocation } from "react-router-dom"
-
-import { API_URL } from '../config';
 
 function Navbar() {
     const [user, setUser] = useState(null);
@@ -9,7 +7,7 @@ function Navbar() {
 
      useEffect(() => {
         // Check if user is authenticated
-        fetch('https://microjam-backend.onrender.com/auth/user', {
+        fetch('http://localhost:3000/auth/user', {
             credentials: 'include'
         })
             .then(res => res.json())
@@ -26,12 +24,12 @@ function Navbar() {
     }, []);
 
     const handleLogin = () => {
-    window.location.href = 'https://microjam-backend.onrender.com/auth/discord';
+    window.location.href = 'http://localhost:3000/auth/discord';
   };
 
   const handleLogout = async () => {
         try {
-            await fetch('https://microjam-backend.onrender.com/auth/logout', {
+            await fetch('http://localhost:3000/auth/logout', {
                 credentials: 'include'
             });
             setUser(null);
