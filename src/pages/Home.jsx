@@ -40,7 +40,7 @@ function Home() {
             />
         </div>
 
-        <div>
+        <div className="mt-[5rem]">
             <p className="text-white text-2xl font-bold mt-[4rem]">🤝 our beloved partners</p>
             <div className="text-lg font-bold">
                 <section id="list" className="group mt-[1rem]">
