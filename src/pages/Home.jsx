@@ -17,7 +17,7 @@ function Home() {
         <div>
             <p className="text-white text-2xl font-bold mt-[6rem]">👋 hello, welcome to this page!</p>
             <p className="text-nm text-base font-bold mt-[1rem]">Micro Jam is a 48-hour Game Jam (game dev competition) that runs once every 2 weeks. We host our Jams on itch.io, and we're trying to become the world's largest weekend Jam.</p>
-            <p className="text-nm text-base font-bold mt-[1rem]">We offer $200+ worth of prizes every event, thanks to our title sponsors <span className="italic underline">GameMaker</span> and <span className="italic underline">Bezi</span>, as well as <span className="italic underline">MiniScript</span>! They've helped us grow to a community of 3,500+ members in less than 2 years time.</p>
+            <p className="text-nm text-base font-bold mt-[1rem]">We offer $200+ worth of prizes every event, thanks to our sponsors <span className="italic underline">GameMaker</span> and <span className="italic underline">Bezi</span>, as well as <span className="italic underline">MiniScript</span>! They've helped us grow to a community of 3,500+ members in less than 2 years time.</p>
 
             <div className="mt-[1rem] text-lg font-bold">
                 <p className="text-muted">
