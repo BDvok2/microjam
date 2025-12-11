@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 
 import axios from "axios";
 
+const { API_URL } = import.meta.env.API_URL;
+
 function Navbar() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -12,14 +14,14 @@ function Navbar() {
     }, []);
 
     const handleLogin = () => {
-        window.location.href = 'http://localhost:4000/auth/discord/login';
+        window.location.href = `${API_URL}/auth/discord/login`;
     }
 
     const handleLogout = async (e) => {
         e.preventDefault();
         
         try {
-            await axios.post('http://localhost:4000/auth/logout', {}, {
+            await axios.post(`${API_URL}/auth/logout`, {}, {
                 withCredentials: true
             });
             
@@ -34,7 +36,7 @@ function Navbar() {
     
     const getMe = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/user/me', {
+            const response = await axios.get(`${API_URL}/user/me`, {
                 withCredentials: true,
             });
             console.log('User:', response.data);
