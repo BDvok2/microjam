@@ -27,7 +27,7 @@ function Navbar() {
             
             setUser(null);
             window.location.href = '/';
-            console.log('👤 FULL USER OBJECT:', response.data);  // ← Check this
+            console.log('👤 FULL USER OBJECT:', response.data);
             console.log('👤 USERNAME:', response.data.username);
             console.log('👤 DISCORD_ID:', response.data.discord_id);
         } catch (error) {
@@ -74,7 +74,7 @@ function Navbar() {
                     /
                 </span>
                 <span className="text-primary underline">
-                    <Link to="/hof">hall of fame</Link>
+                    <Link to="/hof">hoFame</Link>
                 </span>
                 <span className="text-muted mx-[0.5rem]">
                     /
