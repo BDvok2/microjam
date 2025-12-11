@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 import axios from "axios";
 
-const API_URL = import.meta.env.API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Navbar() {
     const [user, setUser] = useState(null);
@@ -27,6 +27,9 @@ function Navbar() {
             
             setUser(null);
             window.location.href = '/';
+            console.log('👤 FULL USER OBJECT:', response.data);  // ← Check this
+            console.log('👤 USERNAME:', response.data.username);
+            console.log('👤 DISCORD_ID:', response.data.discord_id);
         } catch (error) {
             console.error('Logout failed:', error);
             setUser(null);
