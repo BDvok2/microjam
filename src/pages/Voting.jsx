@@ -68,7 +68,7 @@ function Voting() {
             
             {selectedTheme && (
                 <p className="text-primary text-lg font-bold mt-[2rem]">
-                    ✅ You voted for: *{selectedTheme}*
+                    ✅ <span className="text-white">You voted for: </span>*{selectedTheme}*
                 </p>
             )}
             
