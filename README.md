@@ -12,6 +12,11 @@ Micro Jam is a game development competition hosted on itch.io, aiming to become 
 - **Vite** - Build tool and dev server
 - **Tailwind CSS** - Styling
 - **React Router** - Client-side routing
+- **Axios** - HTTP client for API requests
+
+## Authentication
+
+The site uses **Discord OAuth** for user authentication. Users can log in with their Discord account to access features like voting. Authentication is handled via cookies and JWT tokens managed by the backend API.
 
 ## Project Structure
 
