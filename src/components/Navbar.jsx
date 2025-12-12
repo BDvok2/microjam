@@ -27,9 +27,6 @@ function Navbar() {
             
             setUser(null);
             window.location.href = '/';
-            console.log('👤 FULL USER OBJECT:', response.data);
-            console.log('👤 USERNAME:', response.data.username);
-            console.log('👤 DISCORD_ID:', response.data.discord_id);
         } catch (error) {
             console.error('Logout failed:', error);
             setUser(null);
@@ -42,7 +39,6 @@ function Navbar() {
             const response = await axios.get(`${API_URL}/user/me`, {
                 withCredentials: true,
             });
-            console.log('User:', response.data);
             setUser(response.data);
         } catch (error) {
             console.error('Not logged in:', error);
@@ -53,42 +49,42 @@ function Navbar() {
     }
 
   return (
-    <div className="grid grid-cols-custom-layout w-full gap-4">
+    <div className="flex flex-col md:grid md:grid-cols-custom-layout w-full gap-2 md:gap-4 px-4 md:px-0">
         <div className="flex justify-start items-center">
-            <p className="text-muted font-bold text-3xl">
+            <p className="text-muted font-bold text-xl md:text-3xl">
                 // Micro Jam
             </p>
         </div>
-        <div className="flex justify-end items-center">
-            <p className="flex justify-center items-center font-bold text-base">
+        <div className="flex flex-wrap justify-start md:justify-end items-center gap-1 md:gap-0">
+            <p className="flex flex-wrap justify-start md:justify-center items-center font-bold text-sm md:text-base">
                 <span className="text-primary underline">
                     <Link to="/">home</Link>
                 </span>
-                <span className="text-muted mx-[0.5rem]">
+                <span className="text-muted mx-1 md:mx-[0.5rem]">
                     /
                 </span>
                 <span className="text-primary underline">
                     <Link to="/jams">jams</Link>
                 </span>
-                <span className="text-muted mx-[0.5rem]">
+                <span className="text-muted mx-1 md:mx-[0.5rem]">
                     /
                 </span>
                 <span className="text-primary underline">
                     <Link to="/hof">hoFame</Link>
                 </span>
-                <span className="text-muted mx-[0.5rem]">
+                <span className="text-muted mx-1 md:mx-[0.5rem]">
                     /
                 </span>
                 <span className="text-primary underline">
                     <Link to="/voting">voting</Link>
                 </span>
-                <span className="text-muted mx-[0.5rem]">
+                <span className="text-muted mx-1 md:mx-[0.5rem]">
                     /
                 </span>
                 {loading ? (
                     <span className="text-muted">...</span>
                 ) : user ? (
-                    <span className="text-white italic underline relative group border border-white px-2 py-1">
+                    <span className="text-white italic underline relative group border border-white px-1 md:px-2 py-0.5 md:py-1 text-xs md:text-base">
                         <a href="#" onClick={handleLogout} className="cursor-pointer">
                             *{user.username}*
                         </a>
