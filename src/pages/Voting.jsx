@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+import apiClient from '../services/apiClient';
 
 const themes = [
     "Constantly overworked",
@@ -21,12 +20,7 @@ function Voting() {
 
     const checkExistingVote = async () => {
         try {
-            const response = await axios.get(`${API_URL}/votes/current`, {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            const response = await apiClient.get(`/votes/current`);
             
             if (response.data.hasVoted) {
                 setSelectedTheme(response.data.selectedTheme);
@@ -40,15 +34,7 @@ function Voting() {
 
     const handleVote = async (theme) => {
         try {
-            await axios.post(`${API_URL}/votes`, 
-                { theme },
-                { 
-                    withCredentials: true,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-            );
+            await apiClient.post(`/votes`, { theme });
             
             setSelectedTheme(theme);
         } catch (error) {
