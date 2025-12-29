@@ -1,51 +1,70 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { API_URL } from "../config";
+import apiClient from "../services/apiClient";
+import { saveAuthToken, clearAuthToken } from "../services/authToken";
 
 function Navbar() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        syncTokenFromUrl();
         getMe();
     }, []);
 
     const handleLogin = () => {
-        window.location.href = `${API_URL}/auth/discord/login`;
+        if (typeof window === 'undefined') return;
+
+        const loginUrl = new URL(`${API_URL}/auth/discord/login`);
+        loginUrl.searchParams.set('redirectUrl', window.location.origin);
+
+        window.location.href = loginUrl.toString();
     }
 
     const handleLogout = async (e) => {
         e.preventDefault();
         
         try {
-            await axios.post(`${API_URL}/auth/logout`, {}, {
-                withCredentials: true
-            });
-            
-            setUser(null);
-            window.location.href = '/';
+            await apiClient.post(`/auth/logout`);
         } catch (error) {
             console.error('Logout failed:', error);
+        } finally {
+            clearAuthToken();
             setUser(null);
             window.location.href = '/';
         }
     };
-    
+
     const getMe = async () => {
         try {
-            const response = await axios.get(`${API_URL}/user/me`, {
-                withCredentials: true,
-            });
+            const response = await apiClient.get(`/user/me`);
             setUser(response.data);
         } catch (error) {
+            if (error.response?.status === 401) {
+                clearAuthToken();
+            }
             console.error('Not logged in:', error);
             setUser(null);
         } finally {
             setLoading(false);
         }
+    }
+
+    const syncTokenFromUrl = () => {
+        if (typeof window === 'undefined') return;
+
+        const url = new URL(window.location.href);
+        const token = url.searchParams.get('token');
+
+        if (!token) return;
+
+        saveAuthToken(token);
+        url.searchParams.delete('token');
+        const newSearch = url.searchParams.toString();
+        const newUrl = `${url.pathname}${newSearch ? `?${newSearch}` : ''}${url.hash}`;
+        window.history.replaceState({}, '', newUrl);
     }
 
   return (
